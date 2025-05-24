@@ -1,0 +1,651 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		602B70472DE1FD4400A02D56 /* FilePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 602B70462DE1FD4400A02D56 /* FilePicker */; };
+		60DB6CAB2DE0DC9B0001DA80 /* Controls in Frameworks */ = {isa = PBXBuildFile; productRef = 60DB6CAA2DE0DC9B0001DA80 /* Controls */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		60DB6C8C2DE0DB230001DA80 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 60DB6C752DE0DB210001DA80 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 60DB6C7C2DE0DB210001DA80;
+			remoteInfo = Racc;
+		};
+		60DB6C962DE0DB230001DA80 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 60DB6C752DE0DB210001DA80 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 60DB6C7C2DE0DB210001DA80;
+			remoteInfo = Racc;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		60DB6C7D2DE0DB210001DA80 /* Racc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Racc.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		60DB6C8B2DE0DB230001DA80 /* RaccTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RaccTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		60DB6C952DE0DB230001DA80 /* RaccUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RaccUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		60DB6C7F2DE0DB210001DA80 /* Racc */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Racc;
+			sourceTree = "<group>";
+		};
+		60DB6C8E2DE0DB230001DA80 /* RaccTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = RaccTests;
+			sourceTree = "<group>";
+		};
+		60DB6C982DE0DB230001DA80 /* RaccUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = RaccUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		60DB6C7A2DE0DB210001DA80 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				602B70472DE1FD4400A02D56 /* FilePicker in Frameworks */,
+				60DB6CAB2DE0DC9B0001DA80 /* Controls in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		60DB6C882DE0DB230001DA80 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		60DB6C922DE0DB230001DA80 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		60DB6C742DE0DB210001DA80 = {
+			isa = PBXGroup;
+			children = (
+				60DB6C7F2DE0DB210001DA80 /* Racc */,
+				60DB6C8E2DE0DB230001DA80 /* RaccTests */,
+				60DB6C982DE0DB230001DA80 /* RaccUITests */,
+				60DB6CA92DE0DC9B0001DA80 /* Frameworks */,
+				60DB6C7E2DE0DB210001DA80 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		60DB6C7E2DE0DB210001DA80 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				60DB6C7D2DE0DB210001DA80 /* Racc.app */,
+				60DB6C8B2DE0DB230001DA80 /* RaccTests.xctest */,
+				60DB6C952DE0DB230001DA80 /* RaccUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		60DB6CA92DE0DC9B0001DA80 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		60DB6C7C2DE0DB210001DA80 /* Racc */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 60DB6C9F2DE0DB230001DA80 /* Build configuration list for PBXNativeTarget "Racc" */;
+			buildPhases = (
+				60DB6C792DE0DB210001DA80 /* Sources */,
+				60DB6C7A2DE0DB210001DA80 /* Frameworks */,
+				60DB6C7B2DE0DB210001DA80 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				60DB6C7F2DE0DB210001DA80 /* Racc */,
+			);
+			name = Racc;
+			packageProductDependencies = (
+				60DB6CAA2DE0DC9B0001DA80 /* Controls */,
+				602B70462DE1FD4400A02D56 /* FilePicker */,
+			);
+			productName = Racc;
+			productReference = 60DB6C7D2DE0DB210001DA80 /* Racc.app */;
+			productType = "com.apple.product-type.application";
+		};
+		60DB6C8A2DE0DB230001DA80 /* RaccTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 60DB6CA22DE0DB230001DA80 /* Build configuration list for PBXNativeTarget "RaccTests" */;
+			buildPhases = (
+				60DB6C872DE0DB230001DA80 /* Sources */,
+				60DB6C882DE0DB230001DA80 /* Frameworks */,
+				60DB6C892DE0DB230001DA80 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				60DB6C8D2DE0DB230001DA80 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				60DB6C8E2DE0DB230001DA80 /* RaccTests */,
+			);
+			name = RaccTests;
+			packageProductDependencies = (
+			);
+			productName = RaccTests;
+			productReference = 60DB6C8B2DE0DB230001DA80 /* RaccTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		60DB6C942DE0DB230001DA80 /* RaccUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 60DB6CA52DE0DB230001DA80 /* Build configuration list for PBXNativeTarget "RaccUITests" */;
+			buildPhases = (
+				60DB6C912DE0DB230001DA80 /* Sources */,
+				60DB6C922DE0DB230001DA80 /* Frameworks */,
+				60DB6C932DE0DB230001DA80 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				60DB6C972DE0DB230001DA80 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				60DB6C982DE0DB230001DA80 /* RaccUITests */,
+			);
+			name = RaccUITests;
+			packageProductDependencies = (
+			);
+			productName = RaccUITests;
+			productReference = 60DB6C952DE0DB230001DA80 /* RaccUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		60DB6C752DE0DB210001DA80 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1630;
+				LastUpgradeCheck = 1630;
+				TargetAttributes = {
+					60DB6C7C2DE0DB210001DA80 = {
+						CreatedOnToolsVersion = 16.3;
+					};
+					60DB6C8A2DE0DB230001DA80 = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = 60DB6C7C2DE0DB210001DA80;
+					};
+					60DB6C942DE0DB230001DA80 = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = 60DB6C7C2DE0DB210001DA80;
+					};
+				};
+			};
+			buildConfigurationList = 60DB6C782DE0DB210001DA80 /* Build configuration list for PBXProject "Racc" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 60DB6C742DE0DB210001DA80;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				60DB6CA82DE0DB770001DA80 /* XCRemoteSwiftPackageReference "Controls" */,
+				602B70452DE1FD4400A02D56 /* XCRemoteSwiftPackageReference "FilePicker" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 60DB6C7E2DE0DB210001DA80 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				60DB6C7C2DE0DB210001DA80 /* Racc */,
+				60DB6C8A2DE0DB230001DA80 /* RaccTests */,
+				60DB6C942DE0DB230001DA80 /* RaccUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		60DB6C7B2DE0DB210001DA80 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		60DB6C892DE0DB230001DA80 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		60DB6C932DE0DB230001DA80 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		60DB6C792DE0DB210001DA80 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		60DB6C872DE0DB230001DA80 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		60DB6C912DE0DB230001DA80 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		60DB6C8D2DE0DB230001DA80 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 60DB6C7C2DE0DB210001DA80 /* Racc */;
+			targetProxy = 60DB6C8C2DE0DB230001DA80 /* PBXContainerItemProxy */;
+		};
+		60DB6C972DE0DB230001DA80 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 60DB6C7C2DE0DB210001DA80 /* Racc */;
+			targetProxy = 60DB6C962DE0DB230001DA80 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		60DB6C9D2DE0DB230001DA80 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = HRFL8T7554;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		60DB6C9E2DE0DB230001DA80 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = HRFL8T7554;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		60DB6CA02DE0DB230001DA80 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Racc/Racc.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HRFL8T7554;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rikner.Racc;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 2.4;
+			};
+			name = Debug;
+		};
+		60DB6CA12DE0DB230001DA80 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Racc/Racc.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HRFL8T7554;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rikner.Racc;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 2.4;
+			};
+			name = Release;
+		};
+		60DB6CA32DE0DB230001DA80 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HRFL8T7554;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MACOSX_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rikner.RaccTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Racc.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Racc";
+				XROS_DEPLOYMENT_TARGET = 2.4;
+			};
+			name = Debug;
+		};
+		60DB6CA42DE0DB230001DA80 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HRFL8T7554;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MACOSX_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rikner.RaccTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Racc.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Racc";
+				XROS_DEPLOYMENT_TARGET = 2.4;
+			};
+			name = Release;
+		};
+		60DB6CA62DE0DB230001DA80 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HRFL8T7554;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MACOSX_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rikner.RaccUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_TARGET_NAME = Racc;
+				XROS_DEPLOYMENT_TARGET = 2.4;
+			};
+			name = Debug;
+		};
+		60DB6CA72DE0DB230001DA80 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HRFL8T7554;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MACOSX_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rikner.RaccUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_TARGET_NAME = Racc;
+				XROS_DEPLOYMENT_TARGET = 2.4;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		60DB6C782DE0DB210001DA80 /* Build configuration list for PBXProject "Racc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				60DB6C9D2DE0DB230001DA80 /* Debug */,
+				60DB6C9E2DE0DB230001DA80 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		60DB6C9F2DE0DB230001DA80 /* Build configuration list for PBXNativeTarget "Racc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				60DB6CA02DE0DB230001DA80 /* Debug */,
+				60DB6CA12DE0DB230001DA80 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		60DB6CA22DE0DB230001DA80 /* Build configuration list for PBXNativeTarget "RaccTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				60DB6CA32DE0DB230001DA80 /* Debug */,
+				60DB6CA42DE0DB230001DA80 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		60DB6CA52DE0DB230001DA80 /* Build configuration list for PBXNativeTarget "RaccUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				60DB6CA62DE0DB230001DA80 /* Debug */,
+				60DB6CA72DE0DB230001DA80 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		602B70452DE1FD4400A02D56 /* XCRemoteSwiftPackageReference "FilePicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/0xWDG/FilePicker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.4;
+			};
+		};
+		60DB6CA82DE0DB770001DA80 /* XCRemoteSwiftPackageReference "Controls" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AudioKit/Controls/";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		602B70462DE1FD4400A02D56 /* FilePicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 602B70452DE1FD4400A02D56 /* XCRemoteSwiftPackageReference "FilePicker" */;
+			productName = FilePicker;
+		};
+		60DB6CAA2DE0DC9B0001DA80 /* Controls */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 60DB6CA82DE0DB770001DA80 /* XCRemoteSwiftPackageReference "Controls" */;
+			productName = Controls;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 60DB6C752DE0DB210001DA80 /* Project object */;
+}
