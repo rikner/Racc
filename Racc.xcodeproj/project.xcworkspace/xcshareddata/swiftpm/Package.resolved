@@ -1,0 +1,24 @@
+{
+  "originHash" : "389e6c2c57ce15e94754290b730402124f61e9a82781904c86a47c3093cd52d5",
+  "pins" : [
+    {
+      "identity" : "controls",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AudioKit/Controls/",
+      "state" : {
+        "revision" : "4dd10370125af7f1e26d7a71b2c5929bb3c95087",
+        "version" : "1.1.4"
+      }
+    },
+    {
+      "identity" : "filepicker",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/0xWDG/FilePicker.git",
+      "state" : {
+        "revision" : "b8a85bdea42cb8992cc474850a66d2b8b3febf01",
+        "version" : "0.0.4"
+      }
+    }
+  ],
+  "version" : 3
+}
