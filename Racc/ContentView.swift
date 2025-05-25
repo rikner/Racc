@@ -20,7 +20,6 @@ struct ContentView: View {
             }
             .padding()
              .onChange(of: crossfaderValue) { newValue in
-                 // Update volume of audioPlayerA and audioPlayerB based on newValue
                  audioManager.setCrossfader(value: newValue)
              }
         }

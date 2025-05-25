@@ -2,26 +2,25 @@ import AVFoundation
 import Combine
 
 class AudioPlayer: ObservableObject {
-    let playerNode = AVAudioPlayerNode()
     private var audioFile: AVAudioFile?
-    private var engine: AVAudioEngine? // Reference to the engine it's part of
+    private var engine: AVAudioEngine
+    private let playerNode = AVAudioPlayerNode()
+    public let mixerNode = AVAudioMixerNode()
 
-    init() {
-        // Node is created, but not yet attached to an engine
-    }
-
-    func assignEngine(_ audioEngine: AVAudioEngine) {
-        self.engine = audioEngine
-        // AudioManager will be responsible for attaching this playerNode to the passed engine.
+    init(attachTo engine: AVAudioEngine, toBus bus: AVAudioNodeBus) {
+        self.engine = engine
+        engine.attach(playerNode)
+        engine.attach(mixerNode)
+        
+        let outputFormat = mixerNode.outputFormat(forBus: 0)
+        
+        engine.connect(playerNode, to: mixerNode, format: outputFormat)
+        engine.connect(mixerNode, to: engine.mainMixerNode, fromBus: 0, toBus: bus, format: outputFormat)
     }
 
     func loadFile(url: URL) {
-        guard let assignedEngine = self.engine else {
-            print("AudioPlayer: Engine not assigned. Cannot load file.")
-            return
-        }
         // Check if the playerNode is actually part of the assigned engine's graph
-        guard playerNode.engine == assignedEngine else {
+        guard playerNode.engine == engine else {
              print("AudioPlayer: PlayerNode not attached to the assigned engine. Cannot load file.")
              return
         }
@@ -43,7 +42,7 @@ class AudioPlayer: ObservableObject {
     }
     
     func setVolume(_ volume: Float) {
-        playerNode.volume = max(0.0, min(1.0, volume))
+        mixerNode.volume = max(0.0, min(1.0, volume))
     }
 
     func play() {
@@ -51,15 +50,15 @@ class AudioPlayer: ObservableObject {
             print("AudioPlayer: Cannot play. No audio file loaded.")
             return
         }
-        guard let assignedEngine = self.engine, playerNode.engine == assignedEngine else {
+        guard playerNode.engine == engine else {
             print("AudioPlayer: Cannot play. Node not attached to its assigned engine.")
             return
         }
 
         if !playerNode.isPlaying {
             do {
-                if !assignedEngine.isRunning {
-                    try assignedEngine.start()
+                if !engine.isRunning {
+                    try engine.start()
                 }
                 playerNode.play()
                 print("AudioPlayer: Play command issued.")
@@ -79,6 +78,7 @@ class AudioPlayer: ObservableObject {
     func stop() {
         if playerNode.isPlaying {
             playerNode.stop()
+            print("AudioPlayer: Stop command issued.")
         }
     }
 }
