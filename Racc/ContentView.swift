@@ -19,9 +19,9 @@ struct ContentView: View {
                 Text("Crossfader")
             }
             .padding()
-             .onChange(of: crossfaderValue) { newValue in
-                 audioManager.setCrossfader(value: newValue)
-             }
+            .onChange(of: crossfaderValue) { newValue in
+                audioManager.setCrossfader(value: newValue)
+            }
         }
         .padding()
     }
@@ -34,7 +34,7 @@ struct DeckView: View {
 
     @State private var audioFileURL: URL?
     
-    @State var modulation: Float = 0.5
+    @State var modWheelValue: Float = 0.5
     
     @State var isPlaying = false
 
@@ -66,10 +66,14 @@ struct DeckView: View {
 
             Equalizer() // You can have an EQ per deck
 
-            ModWheel(value: $modulation)
+            ModWheel(value: $modWheelValue)
                 .foregroundColor(.black)
                 .cornerRadius(10)
                 .frame(width: 50)
+                .onChange(of: modWheelValue) { newValue in
+                    print("modWheelValue: \(newValue)")
+                    audioPlayer.setModWheel(value: newValue)
+                }
         }
         .padding()
         .background(Color.gray.opacity(0.2))

@@ -1,21 +1,35 @@
 import AVFoundation
 import Combine
 
+// lower and upper bound for playback speed as range
+//public let PLAYBACK_RATE_RANGE: ClosedRange<Float> = 0.84 ... 1.16
+
 class AudioPlayer: ObservableObject {
     private var audioFile: AVAudioFile?
     private var engine: AVAudioEngine
     private let playerNode = AVAudioPlayerNode()
+    private let speedControl = AVAudioUnitVarispeed()
     public let mixerNode = AVAudioMixerNode()
+    
 
     init(attachTo engine: AVAudioEngine, toBus bus: AVAudioNodeBus) {
         self.engine = engine
         engine.attach(playerNode)
         engine.attach(mixerNode)
+        engine.attach(speedControl)
         
         let outputFormat = mixerNode.outputFormat(forBus: 0)
         
-        engine.connect(playerNode, to: mixerNode, format: outputFormat)
-        engine.connect(mixerNode, to: engine.mainMixerNode, fromBus: 0, toBus: bus, format: outputFormat)
+        engine.connect(playerNode, to: speedControl, format: outputFormat)
+        engine.connect(speedControl, to: mixerNode, format: outputFormat)
+
+        engine.connect(
+            mixerNode,
+            to: engine.mainMixerNode,
+            fromBus: 0,
+            toBus: bus,
+            format: outputFormat
+        )
     }
 
     func loadFile(url: URL) {
@@ -43,6 +57,12 @@ class AudioPlayer: ObservableObject {
     
     func setVolume(_ volume: Float) {
         mixerNode.volume = max(0.0, min(1.0, volume))
+    }
+    
+    func setModWheel(value: Float) {
+        let a: Float = 0.8
+        let b: Float = 1.2
+        speedControl.rate = a + (value * (b - a))
     }
 
     func play() {
