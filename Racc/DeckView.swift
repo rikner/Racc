@@ -23,14 +23,29 @@ struct DeckView: View {
     @State var midEqKnobValue: Float = 0.5
     @State var highEqKnobValue: Float = 0.5
     
-    @ViewBuilder
     private var waveForm: some View {
-        if let sampleBuffer = sampleBuffer {
-            Waveform(samples: sampleBuffer)
-        } else {
-            EmptyView()
-        }
+        // Define the desired fixed height for the waveform area
+        let waveformHeight: CGFloat = 100 // Adjust this value as needed
 
+        return Group {
+            if let sampleBuffer = sampleBuffer {
+                Waveform(samples: sampleBuffer)
+                    .foregroundColor(.gray)
+                    .background(Color.gray.opacity(0.1))
+            } else {
+                // Use a view that will respect the frame to maintain size.
+                // Color.clear will take up space but be invisible.
+//                Color.clear
+                // Alternatively, for a visual placeholder:
+                 ZStack {
+                     Rectangle().fill(Color.gray.opacity(0.1)) // Placeholder background
+                     Text("No track loaded").foregroundColor(.gray)
+                 }
+            }
+        }
+        .frame(height: waveformHeight) // Apply the fixed height
+        // You can also set a width or allow it to be flexible
+        .frame(maxWidth: .infinity) // Example: make it take full available width
     }
 
     @ViewBuilder
