@@ -2,9 +2,7 @@ import SwiftUI
 import Controls
 
 struct ContentView: View {
-    
     @State var crossfaderValue: Float = 0.5
-    
     @StateObject private var audioManager = AudioManager()
     
     var body: some View {
@@ -16,7 +14,7 @@ struct ContentView: View {
 
             Slider(value: $crossfaderValue, in: 0...1)
             .padding()
-            .onChange(of: crossfaderValue) { newValue in
+            .onChange(of: crossfaderValue) { _, newValue in
                 audioManager.setCrossfader(value: newValue)
             }
         }

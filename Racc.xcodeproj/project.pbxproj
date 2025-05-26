@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		602B70472DE1FD4400A02D56 /* FilePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 602B70462DE1FD4400A02D56 /* FilePicker */; };
+		60B706B12DE472F800451F48 /* Waveform in Frameworks */ = {isa = PBXBuildFile; productRef = 60B706B02DE472F800451F48 /* Waveform */; };
 		60DB6CAB2DE0DC9B0001DA80 /* Controls in Frameworks */ = {isa = PBXBuildFile; productRef = 60DB6CAA2DE0DC9B0001DA80 /* Controls */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				602B70472DE1FD4400A02D56 /* FilePicker in Frameworks */,
+				60B706B12DE472F800451F48 /* Waveform in Frameworks */,
 				60DB6CAB2DE0DC9B0001DA80 /* Controls in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -129,6 +131,7 @@
 			packageProductDependencies = (
 				60DB6CAA2DE0DC9B0001DA80 /* Controls */,
 				602B70462DE1FD4400A02D56 /* FilePicker */,
+				60B706B02DE472F800451F48 /* Waveform */,
 			);
 			productName = Racc;
 			productReference = 60DB6C7D2DE0DB210001DA80 /* Racc.app */;
@@ -215,6 +218,7 @@
 			packageReferences = (
 				60DB6CA82DE0DB770001DA80 /* XCRemoteSwiftPackageReference "Controls" */,
 				602B70452DE1FD4400A02D56 /* XCRemoteSwiftPackageReference "FilePicker" */,
+				60B706AF2DE472F800451F48 /* XCRemoteSwiftPackageReference "Waveform" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 60DB6C7E2DE0DB210001DA80 /* Products */;
@@ -624,6 +628,14 @@
 				minimumVersion = 0.0.4;
 			};
 		};
+		60B706AF2DE472F800451F48 /* XCRemoteSwiftPackageReference "Waveform" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AudioKit/Waveform";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.2;
+			};
+		};
 		60DB6CA82DE0DB770001DA80 /* XCRemoteSwiftPackageReference "Controls" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AudioKit/Controls/";
@@ -639,6 +651,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 602B70452DE1FD4400A02D56 /* XCRemoteSwiftPackageReference "FilePicker" */;
 			productName = FilePicker;
+		};
+		60B706B02DE472F800451F48 /* Waveform */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 60B706AF2DE472F800451F48 /* XCRemoteSwiftPackageReference "Waveform" */;
+			productName = Waveform;
 		};
 		60DB6CAA2DE0DC9B0001DA80 /* Controls */ = {
 			isa = XCSwiftPackageProductDependency;

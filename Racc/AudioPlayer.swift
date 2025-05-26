@@ -1,36 +1,37 @@
 import AVFoundation
-//import Combine
 
 class AudioPlayer: ObservableObject {
-    private var audioFile: AVAudioFile?
+    var audioFile: AVAudioFile?
+    
     private var engine: AVAudioEngine
     private let playerNode = AVAudioPlayerNode()
     private let speedControl = AVAudioUnitVarispeed()
     private let equalizerNode = AVAudioUnitEQ(numberOfBands: 3)
-    public let mixerNode = AVAudioMixerNode()
+    
+    let mixerNode = AVAudioMixerNode()
     
     /// Configure EQ Bands (Low, Mid, High)
     private func configureEqualizer() {
         // Band 0: Low Shelf
         let lowBand = equalizerNode.bands[0]
         lowBand.filterType = .lowShelf
-        lowBand.frequency = 120.0 // Example frequency for low-shelf
-        lowBand.gain = 0.0       // Initial gain in dB
+        lowBand.frequency = 120.0
+        lowBand.gain = 0.0
         lowBand.bypass = false
 
         // Band 1: Mid Parametric/Peaking
         let midBand = equalizerNode.bands[1]
-        midBand.filterType = .parametric // Or .peakingEQ which is an alias
-        midBand.frequency = 1000.0 // Example frequency for mid
-        midBand.bandwidth = 1.0    // Example bandwidth in octaves
-        midBand.gain = 0.0         // Initial gain in dB
+        midBand.filterType = .parametric
+        midBand.frequency = 1000.0
+        midBand.bandwidth = 1.0
+        midBand.gain = 0.0
         midBand.bypass = false
 
         // Band 2: High Shelf
         let highBand = equalizerNode.bands[2]
         highBand.filterType = .highShelf
-        highBand.frequency = 5000.0 // Example frequency for high-shelf
-        highBand.gain = 0.0        // Initial gain in dB
+        highBand.frequency = 5000.0
+        highBand.gain = 0.0
         highBand.bypass = false
     }
     

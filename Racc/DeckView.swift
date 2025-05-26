@@ -1,6 +1,7 @@
 import SwiftUI
 import Controls
-
+import Waveform
+import AVFoundation // TODO: refactor to remove this import
 
 enum DeckLayout {
     case left, right
@@ -11,16 +12,26 @@ struct DeckView: View {
     let layout: DeckLayout
     
     @ObservedObject var audioPlayer: AudioPlayer
+    
+    @State private var samples: [Float]?
 
     @State private var audioFileURL: URL?
-    
-    @State var modWheelValue: Float = 0.5
-    
+    @State private var sampleBuffer: SampleBuffer?
     @State var isPlaying = false
-    
+    @State var modWheelValue: Float = 0.5
     @State var lowEqKnobValue: Float = 0.5
     @State var midEqKnobValue: Float = 0.5
     @State var highEqKnobValue: Float = 0.5
+    
+    @ViewBuilder
+    private var waveForm: some View {
+        if let sampleBuffer = sampleBuffer {
+            Waveform(samples: sampleBuffer)
+        } else {
+            EmptyView()
+        }
+
+    }
 
     @ViewBuilder
     private var modWheelControl: some View {
@@ -28,17 +39,15 @@ struct DeckView: View {
             .foregroundColor(.black)
             .cornerRadius(10)
             .frame(width: 50)
-            .onChange(of: modWheelValue) { newValue in
-                 audioPlayer.setModWheel(value: newValue)
-            }
+            .onChange(of: modWheelValue) { audioPlayer.setModWheel(value: $1) }
     }
 
     @ViewBuilder
     private var equalizerControl: some View {
         Equalizer(hi: $highEqKnobValue, mid: $midEqKnobValue, lo: $lowEqKnobValue)
-            .onChange(of: highEqKnobValue, perform: audioPlayer.setHighEQ)
-            .onChange(of: midEqKnobValue, perform: audioPlayer.setMidEQ)
-            .onChange(of: lowEqKnobValue, perform: audioPlayer.setLowEQ)
+            .onChange(of: highEqKnobValue) { audioPlayer.setHighEQ(value: $1) }
+            .onChange(of: midEqKnobValue) { audioPlayer.setMidEQ(value: $1) }
+            .onChange(of: lowEqKnobValue) { audioPlayer.setLowEQ(value: $1) }
     }
 
     var body: some View {
@@ -46,7 +55,8 @@ struct DeckView: View {
             
             Text(deckName)
                 .font(.headline)
-
+            
+            waveForm
 
             HStack {
                 AudioFilePicker(selectedFileUrl: $audioFileURL, buttonText: "Load Track")
@@ -84,9 +94,12 @@ struct DeckView: View {
         .padding()
         .background(Color.gray.opacity(0.2))
         .cornerRadius(10)
-        .onChange(of: audioFileURL) { newURL in
+        .onChange(of: audioFileURL) { _, newURL in
             if let url = newURL {
                 audioPlayer.loadFile(url: url)
+                if let audioFile = audioPlayer.audioFile, let samples: [[Float]] = audioFile.floatChannelData() {
+                    sampleBuffer = SampleBuffer(samples: samples[0])
+                }
             }
         }
     }
