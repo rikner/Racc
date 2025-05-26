@@ -79,11 +79,10 @@ class AudioPlayer: ObservableObject {
 
         do {
             audioFile = try AVAudioFile(forReading: url)
-            guard let audioFile = audioFile else { return }
-
-            if playerNode.isPlaying {
-                playerNode.stop()
+            guard let audioFile = audioFile else {
+                return
             }
+            playerNode.stop()
             playerNode.scheduleFile(audioFile, at: nil, completionHandler: {
                 print("AudioPlayer: \(url.lastPathComponent) finished playing.")
             })
