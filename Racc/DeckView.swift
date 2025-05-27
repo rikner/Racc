@@ -33,10 +33,6 @@ struct DeckView: View {
                     .foregroundColor(.gray)
                     .background(Color.gray.opacity(0.1))
             } else {
-                // Use a view that will respect the frame to maintain size.
-                // Color.clear will take up space but be invisible.
-//                Color.clear
-                // Alternatively, for a visual placeholder:
                  ZStack {
                      Rectangle().fill(Color.gray.opacity(0.1)) // Placeholder background
                      Text("No track loaded").foregroundColor(.gray)
@@ -44,17 +40,34 @@ struct DeckView: View {
             }
         }
         .frame(height: waveformHeight) // Apply the fixed height
-        // You can also set a width or allow it to be flexible
-        .frame(maxWidth: .infinity) // Example: make it take full available width
+        .frame(maxWidth: .infinity)
+        .cornerRadius(10)
+        .border(.bar, width: 2)
+        .padding(.all)
     }
 
     @ViewBuilder
     private var modWheelControl: some View {
-        ModWheel(value: $modWheelValue)
-            .foregroundColor(.black)
-            .cornerRadius(10)
-            .frame(width: 50)
-            .onChange(of: modWheelValue) { audioPlayer.setModWheel(value: $1) }
+        GeometryReader { proxy in
+            VStack {
+                Spacer()
+                
+                let height = min(300, proxy.size.height)
+                let width = proxy.size.height / 5
+                
+                ModWheel(value: $modWheelValue)
+                    .foregroundColor(.black)
+                    .cornerRadius(10)
+                    .frame(width: width, height: height)
+                    .onChange(of: modWheelValue) { audioPlayer.setModWheel(value: $1)
+                    }
+
+
+                Spacer()
+            }
+            .frame(maxWidth: .infinity)
+        }
+
     }
 
     @ViewBuilder
@@ -67,39 +80,33 @@ struct DeckView: View {
 
     var body: some View {
         VStack {
-            
-            Text(deckName)
-                .font(.headline)
-            
-            waveForm
-
             HStack {
-                AudioFilePicker(selectedFileUrl: $audioFileURL, buttonText: "Load Track")
-
-                PlayPauseButton(isPlaying: $isPlaying) {
+                Text(deckName).font(.headline)
+                
+                AudioFilePicker(selectedFileUrl: $audioFileURL)
+                
+                PlayPauseButton(isPlaying: $isPlaying, disabled: audioFileURL == nil) {
                     if isPlaying {
                         audioPlayer.pause()
                     } else {
                         audioPlayer.play()
                     }
                 }
-                .padding(.top)
-
-
-                if let url = audioFileURL {
-                    Text(url.lastPathComponent)
-                        .font(.caption)
-                }
             }
+            
+            waveForm
+
+            if let url = audioFileURL {
+                Text(url.lastPathComponent)
+                    .font(.caption)
+            }        
             
             HStack {
                 if layout == .left {
                     modWheelControl
-                    Spacer()
                     equalizerControl
                 } else {
                     equalizerControl
-                    Spacer()
                     modWheelControl
                 }
             }
@@ -127,19 +134,27 @@ struct Equalizer: View {
     @Binding var lo: Float
     
     let range: ClosedRange<Float> = 0 ... 1
+    private let maxHeight : CGFloat = 80
     
     var body: some View {
         VStack {
-            ArcKnob("Hi", value: $hi, range: range).foregroundColor(.black)
-            ArcKnob("Mid", value: $mid, range: range).foregroundColor(.black)
-            ArcKnob("Lo", value: $lo, range: range).foregroundColor(.black)
-        }.frame(maxHeight: 300)
+            ArcKnob("Hi", value: $hi, range: range)
+                .foregroundColor(.black)
+                .frame(maxHeight: maxHeight)
+            ArcKnob("Mid", value: $mid, range: range)
+                .foregroundColor(.black)
+                .frame(maxHeight: maxHeight)
+            ArcKnob("Lo", value: $lo, range: range)
+                .foregroundColor(.black)
+                .frame(maxHeight: maxHeight)
+        }
     }
 }
 
 
 struct PlayPauseButton: View {
     @Binding var isPlaying: Bool
+    var disabled: Bool
     // You'll likely want an action to call when the button is tapped
      var action: () -> Void
 
@@ -149,6 +164,8 @@ struct PlayPauseButton: View {
             isPlaying.toggle()
         } label: {
             Image(systemName: isPlaying ? "pause.fill" : "play.fill")
+                .frame(width: 64, height: 24)
         }
+        .disabled(disabled)
     }
 }
