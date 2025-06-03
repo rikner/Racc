@@ -46,7 +46,6 @@ class AudioPlayer: ObservableObject {
         
         configureEqualizer()
 
-        // Connect nodes in the chain
         // Player -> SpeedControl
         let playerOutputFormat = playerNode.outputFormat(forBus: 0)
         engine.connect(playerNode, to: speedControl, format: playerOutputFormat)
@@ -63,7 +62,7 @@ class AudioPlayer: ObservableObject {
         let mixerOutputFormat = mixerNode.outputFormat(forBus: 0)
         engine.connect(
             mixerNode,
-            to: engine.mainMixerNode, // Assuming connection to mainMixerNode, adjust if it's a different target
+            to: engine.mainMixerNode,
             fromBus: 0,
             toBus: bus,
             format: mixerOutputFormat
@@ -71,10 +70,8 @@ class AudioPlayer: ObservableObject {
     }
 
     func loadFile(url: URL) {
-        // Check if the playerNode is actually part of the assigned engine's graph
         guard playerNode.engine == engine else {
-             print("AudioPlayer: PlayerNode not attached to the assigned engine. Cannot load file.")
-             return
+             return print("AudioPlayer: PlayerNode not attached to the assigned engine. Cannot load file.")
         }
 
         do {
@@ -103,42 +100,34 @@ class AudioPlayer: ObservableObject {
     }
     
     private func mapToDB(_ value: Float) -> Float {
-        print("input value: \(value)")
         let minDB: Float = -24.0
         let maxDB: Float = 6.0
         // Ensure input value is clamped between 0.0 and 1.0
         let clampedValue = max(0.0, min(1.0, value))
         let a = minDB + (clampedValue * (maxDB - minDB))
-        print("output value: \(a)")
         return a
     }
 
-    // Gain is in decibels (dB). A common range for DJ EQs is -26dB (or -oo for kill EQs) to +6dB or +12dB.
-    
     func setLowEQ(value: Float) {
         guard equalizerNode.bands.indices.contains(0) else { return }
-        equalizerNode.bands[0].gain = mapToDB(value)
-        // print("AudioPlayer: Low EQ Gain set to \(gain) dB")
+        equalizerNode.bands[0].gain = value //mapToDB(value)
     }
 
     func setMidEQ(value: Float) {
         guard equalizerNode.bands.indices.contains(1) else { return }
-        equalizerNode.bands[1].gain = mapToDB(value)
-        // print("AudioPlayer: Mid EQ Gain set to \(gain) dB")
+        equalizerNode.bands[1].gain = value //mapToDB(value)
     }
 
     func setHighEQ(value: Float) {
         guard equalizerNode.bands.indices.contains(2) else { return }
-        equalizerNode.bands[2].gain = mapToDB(value)
-        // print("AudioPlayer: High EQ Gain set to \(gain) dB")
+        equalizerNode.bands[2].gain = value //mapToDB(value)
     }
 
-    
     func play() {
         guard audioFile != nil else {
-            print("AudioPlayer: Cannot play. No audio file loaded.")
-            return
+            return print("AudioPlayer: Cannot play. No audio file loaded.")
         }
+        
         guard playerNode.engine == engine else {
             print("AudioPlayer: Cannot play. Node not attached to its assigned engine.")
             return
@@ -160,14 +149,12 @@ class AudioPlayer: ObservableObject {
     func pause() {
         if playerNode.isPlaying {
             playerNode.pause()
-            print("AudioPlayer: Pause command issued.")
         }
     }
 
     func stop() {
         if playerNode.isPlaying {
             playerNode.stop()
-            print("AudioPlayer: Stop command issued.")
         }
     }
 }

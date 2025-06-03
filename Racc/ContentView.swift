@@ -13,10 +13,11 @@ struct ContentView: View {
             }
 
             Slider(value: $crossfaderValue, in: 0...1)
-            .padding()
-            .onChange(of: crossfaderValue) { _, newValue in
-                audioManager.setCrossfader(value: newValue)
-            }
+                .padding(EdgeInsets(top: 10, leading: 60, bottom: 10, trailing: 60))
+                .onChange(of: crossfaderValue) { _, newValue in
+                    audioManager.setCrossfader(value: newValue)
+                }
+                .tint(Color.gray)
         }
         .padding()
     }

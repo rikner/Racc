@@ -1,7 +1,6 @@
 import SwiftUI
 import Controls
 import Waveform
-import AVFoundation // TODO: refactor to remove this import
 
 enum DeckLayout {
     case left, right
@@ -18,14 +17,13 @@ struct DeckView: View {
     @State private var audioFileURL: URL?
     @State private var sampleBuffer: SampleBuffer?
     @State var isPlaying = false
-    @State var modWheelValue: Float = 0.5
-    @State var lowEqKnobValue: Float = 0.5
-    @State var midEqKnobValue: Float = 0.5
-    @State var highEqKnobValue: Float = 0.5
+    @State var pitchFaderValue: Float = 0.5
+    @State var lowEqKnobValue: Float = 0
+    @State var midEqKnobValue: Float = 0
+    @State var highEqKnobValue: Float = 0
     
     private var waveForm: some View {
-        // Define the desired fixed height for the waveform area
-        let waveformHeight: CGFloat = 100 // Adjust this value as needed
+        let waveformHeight: CGFloat = 100
 
         return Group {
             if let sampleBuffer = sampleBuffer {
@@ -34,34 +32,32 @@ struct DeckView: View {
                     .background(Color.gray.opacity(0.1))
             } else {
                  ZStack {
-                     Rectangle().fill(Color.gray.opacity(0.1)) // Placeholder background
+                     Rectangle().fill(Color.gray.opacity(0.1))
                      Text("No track loaded").foregroundColor(.gray)
                  }
             }
         }
-        .frame(height: waveformHeight) // Apply the fixed height
+        .frame(height: waveformHeight)
         .frame(maxWidth: .infinity)
         .cornerRadius(10)
-        .border(.bar, width: 2)
+        .border(Color.gray, width: 2)
         .padding(.all)
     }
 
     @ViewBuilder
-    private var modWheelControl: some View {
+    private var pitchFader: some View {
         GeometryReader { proxy in
             VStack {
                 Spacer()
                 
                 let height = min(300, proxy.size.height)
-                let width = proxy.size.height / 5
+                let width = height / 5
                 
-                ModWheel(value: $modWheelValue)
+                ModWheel(value: $pitchFaderValue)
                     .foregroundColor(.black)
                     .cornerRadius(10)
                     .frame(width: width, height: height)
-                    .onChange(of: modWheelValue) { audioPlayer.setModWheel(value: $1)
-                    }
-
+                    .onChange(of: pitchFaderValue) { audioPlayer.setModWheel(value: $1) }
 
                 Spacer()
             }
@@ -103,11 +99,11 @@ struct DeckView: View {
             
             HStack {
                 if layout == .left {
-                    modWheelControl
+                    pitchFader
                     equalizerControl
                 } else {
                     equalizerControl
-                    modWheelControl
+                    pitchFader
                 }
             }
 
@@ -133,7 +129,7 @@ struct Equalizer: View {
     @Binding var mid: Float
     @Binding var lo: Float
     
-    let range: ClosedRange<Float> = 0 ... 1
+    let range: ClosedRange<Float> = -36 ... 12
     private let maxHeight : CGFloat = 80
     
     var body: some View {
@@ -155,8 +151,7 @@ struct Equalizer: View {
 struct PlayPauseButton: View {
     @Binding var isPlaying: Bool
     var disabled: Bool
-    // You'll likely want an action to call when the button is tapped
-     var action: () -> Void
+    var action: () -> Void
 
     var body: some View {
         Button {
