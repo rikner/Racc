@@ -81,13 +81,16 @@ struct DeckView: View {
                 
                 AudioFilePicker(selectedFileUrl: $audioFileURL)
                 
-                PlayPauseButton(isPlaying: $isPlaying, disabled: audioFileURL == nil) {
-                    if isPlaying {
-                        audioPlayer.pause()
-                    } else {
-                        audioPlayer.play()
+                PlayPauseButton(isPlaying: .init(
+                    get: { audioPlayer.isPlaying },
+                    set: { newValue in
+                        if newValue {
+                            audioPlayer.play()
+                        } else {
+                            audioPlayer.pause()
+                        }
                     }
-                }
+                ), disabled: audioFileURL == nil)
             }
             
             waveForm
@@ -115,6 +118,7 @@ struct DeckView: View {
         .onChange(of: audioFileURL) { _, newURL in
             if let url = newURL {
                 audioPlayer.loadFile(url: url)
+                
                 if let audioFile = audioPlayer.audioFile, let samples: [[Float]] = audioFile.floatChannelData() {
                     sampleBuffer = SampleBuffer(samples: samples[0])
                 }
@@ -151,11 +155,9 @@ struct Equalizer: View {
 struct PlayPauseButton: View {
     @Binding var isPlaying: Bool
     var disabled: Bool
-    var action: () -> Void
 
     var body: some View {
         Button {
-            action() // XXX: kind of brittle since we rely on order of commands here
             isPlaying.toggle()
         } label: {
             Image(systemName: isPlaying ? "pause.fill" : "play.fill")

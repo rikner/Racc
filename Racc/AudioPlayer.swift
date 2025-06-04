@@ -9,6 +9,8 @@ class AudioPlayer: ObservableObject {
     private let equalizerNode = AVAudioUnitEQ(numberOfBands: 3)
     
     let mixerNode = AVAudioMixerNode()
+
+    @Published private(set) var isPlaying: Bool = false
     
     /// Configure EQ Bands (Low, Mid, High)
     private func configureEqualizer() {
@@ -139,6 +141,7 @@ class AudioPlayer: ObservableObject {
                     try engine.start()
                 }
                 playerNode.play()
+                isPlaying = playerNode.isPlaying
                 print("AudioPlayer: Play command issued.")
             } catch {
                 print("AudioPlayer: Error playing audio: \(error.localizedDescription)")
@@ -149,12 +152,14 @@ class AudioPlayer: ObservableObject {
     func pause() {
         if playerNode.isPlaying {
             playerNode.pause()
+            isPlaying = playerNode.isPlaying
         }
     }
 
     func stop() {
         if playerNode.isPlaying {
             playerNode.stop()
+            isPlaying = playerNode.isPlaying
         }
     }
 }
