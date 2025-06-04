@@ -14,6 +14,9 @@ struct DeckView: View {
     
     @State private var samples: [Float]?
 
+    @State private var isLoadingFile = false
+    @State private var loadingError: Error?
+
     @State private var audioFileURL: URL?
     @State private var sampleBuffer: SampleBuffer?
     @State var isPlaying = false
@@ -26,14 +29,23 @@ struct DeckView: View {
         let waveformHeight: CGFloat = 100
 
         return Group {
-            if let sampleBuffer = sampleBuffer {
+            if isLoadingFile {
+                ProgressView("Loading waveform...")
+                    .frame(height: waveformHeight)
+            } else if let sampleBuffer = sampleBuffer {
                 Waveform(samples: sampleBuffer)
                     .foregroundColor(.gray)
                     .background(Color.gray.opacity(0.1))
             } else {
                  ZStack {
-                     Rectangle().fill(Color.gray.opacity(0.1))
-                     Text("No track loaded").foregroundColor(.gray)
+                    Rectangle().fill(Color.gray.opacity(0.1))
+                    if let error = loadingError {
+                        Text(error.localizedDescription)
+                            .foregroundColor(.red)
+                    } else {
+                        Text("No track loaded")
+                            .foregroundColor(.gray)
+                    }
                  }
             }
         }
@@ -65,8 +77,7 @@ struct DeckView: View {
         }
 
     }
-
-    @ViewBuilder
+    
     private var equalizerControl: some View {
         Equalizer(hi: $highEqKnobValue, mid: $midEqKnobValue, lo: $lowEqKnobValue)
             .onChange(of: highEqKnobValue) { audioPlayer.setHighEQ(value: $1) }
@@ -117,11 +128,26 @@ struct DeckView: View {
         .cornerRadius(10)
         .onChange(of: audioFileURL) { _, newURL in
             if let url = newURL {
+                isLoadingFile = true
+                loadingError = nil
+    
                 audioPlayer.loadFile(url: url)
-                
-                if let audioFile = audioPlayer.audioFile, let samples: [[Float]] = audioFile.floatChannelData() {
-                    sampleBuffer = SampleBuffer(samples: samples[0])
+
+                Task.detached(priority: .userInitiated) {
+                    if let audioFile = await audioPlayer.audioFile,
+                       let samples: [[Float]] = audioFile.floatChannelData()
+                    {
+                        await MainActor.run {
+                            sampleBuffer = SampleBuffer(samples: samples[0])
+                            isLoadingFile = false
+                        }
+                    }
                 }
+            } else {
+                audioPlayer.stop()
+                sampleBuffer = nil
+                isLoadingFile = false
+                loadingError = nil
             }
         }
     }
