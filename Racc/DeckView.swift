@@ -9,9 +9,10 @@ enum DeckLayout {
 struct DeckView: View {
     let deckName: String
     let layout: DeckLayout
-    
+    let accent: Color
+
     @ObservedObject var audioPlayer: AudioPlayer
-    
+
     @State private var samples: [Float]?
 
     @State private var isLoadingFile = false
@@ -24,94 +25,135 @@ struct DeckView: View {
     @State var lowEqKnobValue: Float = 0
     @State var midEqKnobValue: Float = 0
     @State var highEqKnobValue: Float = 0
-    
+
+    private var header: some View {
+        HStack(spacing: 10) {
+            StatusLED(color: accent, isOn: audioPlayer.isPlaying)
+
+            Text(deckName.uppercased())
+                .font(.system(size: 13, weight: .heavy, design: .rounded))
+                .tracking(1.8)
+                .foregroundStyle(accent)
+
+            Spacer()
+
+            AudioFilePicker(selectedFileUrl: $audioFileURL)
+
+            PlayPauseButton(isPlaying: .init(
+                get: { audioPlayer.isPlaying },
+                set: { newValue in
+                    if newValue {
+                        audioPlayer.play()
+                    } else {
+                        audioPlayer.pause()
+                    }
+                }
+            ), disabled: audioFileURL == nil, accent: accent)
+        }
+        .buttonStyle(DeckButtonStyle(accent: accent))
+    }
+
+    private var trackTitle: some View {
+        Text(audioFileURL?.lastPathComponent ?? "— no track loaded —")
+            .font(.system(size: 11, weight: .medium, design: .monospaced))
+            .foregroundStyle(audioFileURL == nil ? Theme.textDim : Theme.textSecondary)
+            .lineLimit(1)
+            .truncationMode(.middle)
+            .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
     private var waveForm: some View {
         let waveformHeight: CGFloat = 100
 
         return Group {
             if isLoadingFile {
                 ProgressView("Loading waveform...")
-                    .frame(height: waveformHeight)
+                    .font(.legend())
+                    .tint(accent)
+                    .foregroundStyle(Theme.textSecondary)
             } else if let sampleBuffer = sampleBuffer {
                 Waveform(samples: sampleBuffer)
-                    .foregroundColor(.gray)
-                    .background(Color.gray.opacity(0.1))
-            } else {
-                 ZStack {
-                    Rectangle().fill(Color.gray.opacity(0.1))
-                    if let error = loadingError {
-                        Text(error.localizedDescription)
-                            .foregroundColor(.red)
-                    } else {
-                        Text("No track loaded")
-                            .foregroundColor(.gray)
+                    .foregroundColor(accent)
+                    .overlay(alignment: .center) {
+                        // Centre line, so quiet passages still read as a signal.
+                        Rectangle()
+                            .fill(accent.opacity(0.35))
+                            .frame(height: 1)
                     }
-                 }
+            } else if let error = loadingError {
+                Text(error.localizedDescription)
+                    .font(.legend())
+                    .foregroundStyle(Theme.danger)
+                    .padding(.horizontal)
+                    .multilineTextAlignment(.center)
+            } else {
+                Image(systemName: "waveform")
+                    .font(.system(size: 22, weight: .light))
+                    .foregroundStyle(Theme.textDim)
             }
         }
-        .frame(height: waveformHeight)
         .frame(maxWidth: .infinity)
-        .cornerRadius(10)
-        .border(Color.gray, width: 2)
-        .padding(.all)
+        .frame(height: waveformHeight)
+        .wellStyle()
     }
 
     @ViewBuilder
     private var pitchFader: some View {
-        GeometryReader { proxy in
-            VStack {
-                Spacer()
-                
-                let height = min(300, proxy.size.height)
-                let width = height / 5
-                
-                ModWheel(value: $pitchFaderValue)
-                    .foregroundColor(.black)
-                    .cornerRadius(10)
-                    .frame(width: width, height: height)
-                    .onChange(of: pitchFaderValue) { audioPlayer.setModWheel(value: $1) }
+        VStack(spacing: 8) {
+            Text("Pitch")
+                .legendLabel()
 
-                Spacer()
+            GeometryReader { proxy in
+                let height = min(280, proxy.size.height)
+                let width = max(28, height / 6)
+
+                VStack {
+                    Spacer(minLength: 0)
+
+                    ModWheel(value: $pitchFaderValue)
+                        .backgroundColor(Theme.well)
+                        .foregroundColor(accent)
+                        .cornerRadius(Theme.controlCorner)
+                        .frame(width: width, height: height)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: Theme.controlCorner)
+                                .strokeBorder(Theme.stroke, lineWidth: 1)
+                        )
+                        .onChange(of: pitchFaderValue) { audioPlayer.setModWheel(value: $1) }
+
+                    Spacer(minLength: 0)
+                }
+                .frame(maxWidth: .infinity)
             }
-            .frame(maxWidth: .infinity)
         }
-
     }
-    
+
     private var equalizerControl: some View {
-        Equalizer(hi: $highEqKnobValue, mid: $midEqKnobValue, lo: $lowEqKnobValue)
+        VStack(spacing: 8) {
+            Text("EQ")
+                .legendLabel()
+
+            Equalizer(
+                hi: $highEqKnobValue,
+                mid: $midEqKnobValue,
+                lo: $lowEqKnobValue,
+                accent: accent
+            )
             .onChange(of: highEqKnobValue) { audioPlayer.setHighEQ(value: $1) }
             .onChange(of: midEqKnobValue) { audioPlayer.setMidEQ(value: $1) }
             .onChange(of: lowEqKnobValue) { audioPlayer.setLowEQ(value: $1) }
+        }
     }
 
     var body: some View {
-        VStack {
-            HStack {
-                Text(deckName).font(.headline)
-                
-                AudioFilePicker(selectedFileUrl: $audioFileURL)
-                
-                PlayPauseButton(isPlaying: .init(
-                    get: { audioPlayer.isPlaying },
-                    set: { newValue in
-                        if newValue {
-                            audioPlayer.play()
-                        } else {
-                            audioPlayer.pause()
-                        }
-                    }
-                ), disabled: audioFileURL == nil)
-            }
-            
+        VStack(spacing: 12) {
+            header
+
             waveForm
 
-            if let url = audioFileURL {
-                Text(url.lastPathComponent)
-                    .font(.caption)
-            }        
-            
-            HStack {
+            trackTitle
+
+            HStack(spacing: 16) {
                 if layout == .left {
                     pitchFader
                     equalizerControl
@@ -120,17 +162,14 @@ struct DeckView: View {
                     pitchFader
                 }
             }
-
-
         }
-        .padding()
-        .background(Color.gray.opacity(0.2))
-        .cornerRadius(10)
+        .padding(16)
+        .panelStyle(accent: accent)
         .onChange(of: audioFileURL) { _, newURL in
             if let url = newURL {
                 isLoadingFile = true
                 loadingError = nil
-    
+
                 audioPlayer.loadFile(url: url)
 
                 Task.detached(priority: .userInitiated) {
@@ -158,22 +197,24 @@ struct Equalizer: View {
     @Binding var hi: Float
     @Binding var mid: Float
     @Binding var lo: Float
-    
+    var accent: Color = Theme.deckA
+
     let range: ClosedRange<Float> = -36 ... 12
     private let maxHeight : CGFloat = 80
-    
+
     var body: some View {
         VStack {
-            ArcKnob("Hi", value: $hi, range: range)
-                .foregroundColor(.black)
-                .frame(maxHeight: maxHeight)
-            ArcKnob("Mid", value: $mid, range: range)
-                .foregroundColor(.black)
-                .frame(maxHeight: maxHeight)
-            ArcKnob("Lo", value: $lo, range: range)
-                .foregroundColor(.black)
-                .frame(maxHeight: maxHeight)
+            knob("Hi", value: $hi)
+            knob("Mid", value: $mid)
+            knob("Lo", value: $lo)
         }
+    }
+
+    private func knob(_ label: String, value: Binding<Float>) -> some View {
+        ArcKnob(label, value: value, range: range)
+            .backgroundColor(Theme.controlTrack)
+            .foregroundColor(accent)
+            .frame(maxHeight: maxHeight)
     }
 }
 
@@ -181,14 +222,16 @@ struct Equalizer: View {
 struct PlayPauseButton: View {
     @Binding var isPlaying: Bool
     var disabled: Bool
+    var accent: Color = Theme.deckA
 
     var body: some View {
         Button {
             isPlaying.toggle()
         } label: {
             Image(systemName: isPlaying ? "pause.fill" : "play.fill")
-                .frame(width: 64, height: 24)
+                .frame(width: 44, height: 16)
         }
+        .buttonStyle(DeckButtonStyle(accent: accent, isActive: isPlaying))
         .disabled(disabled)
     }
 }
